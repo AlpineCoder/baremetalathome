@@ -1,0 +1,10 @@
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: hosted-ipv4
+  namespace: clusters-hosted-ipv4
+spec:
+  pullSecretRef:
+    name: pull-secret
+  sshAuthorizedKey: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINrLu1SjuRfuH22x6DgrVfBcr/GKoT1ORjICwsm5Dz7T roger.zimmermann@inventx.ch'

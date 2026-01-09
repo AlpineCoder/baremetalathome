@@ -1,0 +1,21 @@
+apiVersion: hypershift.openshift.io/v1beta1
+kind: NodePool
+metadata:
+  creationTimestamp: null
+  name: hosted-ipv4
+  namespace: clusters
+spec:
+  arch: amd64
+  clusterName: hosted-ipv4
+  management:
+    autoRepair: false
+    upgradeType: InPlace
+  nodeDrainTimeout: 0s
+  nodeVolumeDetachTimeout: 0s
+  platform:
+    type: Agent
+  release:
+    image: harbor.ocplocal.itix/openshift-release-dev/ocp-release:4.18.30-x86_64
+  replicas: 0
+status:
+  replicas: 0

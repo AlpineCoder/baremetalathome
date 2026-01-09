@@ -1,0 +1,80 @@
+apiVersion: hypershift.openshift.io/v1beta1
+kind: HostedCluster
+metadata:
+  name: hosted-ipv4
+  namespace: clusters
+spec:
+  additionalTrustBundle:
+    name: "user-ca-bundle"
+  olmCatalogPlacement: guest
+  imageContentSources:
+  - source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+    mirrors:
+    - harbor.ocplocal.itix/openshift-release-dev/ocp-v4.0-art-dev
+  - source: quay.io/openshift-release-dev/ocp-release
+    mirrors:
+    - harbor.ocplocal.itix/openshift-release-dev/ocp-release
+  autoscaling: {}
+  controllerAvailabilityPolicy: SingleReplica
+  dns:
+    baseDomain: hypershiftbm.lab
+  etcd:
+    managed:
+      storage:
+        persistentVolume:
+          size: 8Gi
+        restoreSnapshotURL: null
+        type: PersistentVolume
+    managementType: Managed
+  fips: false
+  networking:
+    clusterNetwork:
+    - cidr: 10.132.0.0/14
+    networkType: OVNKubernetes
+    serviceNetwork:
+    - cidr: 172.31.0.0/16
+  platform:
+    agent:
+      agentNamespace: clusters-hosted-ipv4
+    type: Agent
+  pullSecret:
+    name: hosted-ipv4-pull-secret
+  release:
+    image: harbor.ocplocal.itix/openshift-release-dev/ocp-release:4.18.30-x86_64
+  secretEncryption:
+    aescbc:
+      activeKey:
+        name: hosted-ipv4-etcd-encryption-key
+    type: aescbc
+  services:
+  - service: APIServer
+    servicePublishingStrategy:
+      nodePort:
+        address: api.hosted-ipv4.hypershiftbm.lab
+      type: NodePort
+  - service: OAuthServer
+    servicePublishingStrategy:
+      nodePort:
+        address: api.hosted-ipv4.hypershiftbm.lab
+      type: NodePort
+  - service: OIDC
+    servicePublishingStrategy:
+      nodePort:
+        address: api.hosted-ipv4.hypershiftbm.lab
+      type: NodePort
+  - service: Konnectivity
+    servicePublishingStrategy:
+      nodePort:
+        address: api.hosted-ipv4.hypershiftbm.lab
+      type: NodePort
+  - service: Ignition
+    servicePublishingStrategy:
+      nodePort:
+        address: api.hosted-ipv4.hypershiftbm.lab
+      type: NodePort
+  sshKey:
+    name: sshkey-cluster-hosted-ipv4
+status:
+  controlPlaneEndpoint:
+    host: ""
+    port: 0

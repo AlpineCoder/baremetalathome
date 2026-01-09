@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: hosted-ipv4-worker0-bmc-secret
+  namespace: clusters-hosted-ipv4
+data:
+  password: YWRtaW4=
+  username: YWRtaW4=
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: hosted-ipv4-worker0
+  namespace: clusters-hosted-ipv4
+  labels:
+    infraenvs.agent-install.openshift.io: hosted-ipv4
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: hosted-ipv4-worker0
+spec:
+  automatedCleaningMode: disabled
+  bmc:
+    disableCertificateVerification: true
+    address: redfish-virtualmedia://192.168.125.1:9000/redfish/v1/Systems/local/hosted-ipv4-worker0
+    credentialsName: hosted-ipv4-worker0-bmc-secret
+  bootMACAddress: aa:aa:aa:aa:02:11
+  online: true

@@ -1,0 +1,30 @@
+apiVersion: agent-install.openshift.io/v1beta1
+kind: AgentServiceConfig
+metadata:
+  annotations:
+    unsupported.agent-install.openshift.io/assisted-service-configmap: assisted-service-config
+  name: agent
+  namespace: multicluster-engine
+spec:
+  mirrorRegistryRef:
+    name: custom-registries
+  databaseStorage:
+    storageClassName: lvms-vg1
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Gi
+  filesystemStorage:
+    storageClassName: lvms-vg1
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 20Gi
+  osImages:
+  - cpuArchitecture: x86_64
+    openshiftVersion: "4.18"
+    rootFSUrl: http://harbor.ocplocal.itix:8080/rhcos-418.94.202511191518-0-live-rootfs.x86_64.img
+    url: http://harbor.ocplocal.itix:8080/rhcos-418.94.202511191518-0-live.x86_64.iso
+    version: 418.94.202511191518-0
