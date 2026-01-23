@@ -1,0 +1,88 @@
+plan: hub-ipv4
+force: true
+version: stable
+tag: 4.18
+cluster: "hub-ipv4"
+domain: hypershiftbm.lab
+api_ip: 192.168.125.10
+ingress_ip: 192.168.125.11
+disconnected_url: harbor.ocplocal.itix
+disconnected_update: false
+disconnected_user: admin
+disconnected_password: S0mm3r09!
+disconnected_channel: stable
+openshift_version: 4.18.30
+dualstack: false
+disk_size: 200
+extra_disks: [100]
+memory: 49152
+numcpus: 8
+ctlplanes: 3
+workers: 0
+manifests: extra-manifests
+metal3: true
+network: ipv4
+users_dev: developer
+users_devpassword: developer
+users_admin: admin
+users_adminpassword: admin
+metallb_pool: ipv4-virtual-network
+metallb_ranges:
+- 192.168.125.150-192.168.125.190
+metallb_autoassign: true
+apps:
+- users
+- metallb-operator
+- lvms-operator
+vmrules:
+- hub-ipv4-bootstrap:
+    nets:
+    - name: ipv4
+      mac: aa:aa:aa:aa:02:10
+- hub-ipv4-ctlplane-0:
+    nets:
+    - name: ipv4
+      mac: aa:aa:aa:aa:02:01
+- hub-ipv4-ctlplane-1:
+    nets:
+    - name: ipv4
+      mac: aa:aa:aa:aa:02:02
+- hub-ipv4-ctlplane-2:
+    nets:
+    - name: ipv4
+      mac: aa:aa:aa:aa:02:03
+pub_key: id_ed25519.pub
+ca: |
+  -----BEGIN CERTIFICATE-----
+  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
+  -----END CERTIFICATE-----

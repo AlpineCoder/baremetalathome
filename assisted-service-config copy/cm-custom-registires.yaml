@@ -1,0 +1,61 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: custom-registries
+  namespace: multicluster-engine
+  labels:
+    app: assisted-service
+data:
+  ca-bundle.crt: |
+    -----BEGIN CERTIFICATE-----
+    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
+    -----END CERTIFICATE-----
+  registries.conf: |
+    unqualified-search-registries = ["registry.access.redhat.com", "docker.io"]
+
+    [[registry]]
+    prefix = ""
+    location = "registry.redhat.io/openshift4"
+    mirror-by-digest-only = true
+
+    [[registry.mirror]]
+      location = "harbor.ocplocal.itix/openshift4"
+
+    [[registry]]
+    prefix = ""
+    location = "registry.redhat.io/rhacm2"
+    mirror-by-digest-only = true
+
+    [[registry.mirror]]
+      location = "harbor.ocplocal.itix/rhacm2"

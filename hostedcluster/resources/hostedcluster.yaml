@@ -8,9 +8,9 @@ spec:
     name: "user-ca-bundle"
   olmCatalogPlacement: guest
   imageContentSources:
-  - source: quay.io/openshift-release-dev/
+  - source: quay.io/openshift-release-dev
     mirrors:
-    - harbor.ocplocal.itix/openshift-release-dev/
+    - harbor.ocplocal.itix/openshift-release-dev
   autoscaling: {}
   controllerAvailabilityPolicy: SingleReplica
   dns:
@@ -37,7 +37,7 @@ spec:
   pullSecret:
     name: hosted-ipv4-pull-secret
   release:
-    image: harbor.ocplocal.itix/openshift-release-dev/ocp-release:4.18.30-x86_64
+    image: harbor.ocplocal.itix/openshift-release-dev/ocp-release:4.18.26-x86_64
   secretEncryption:
     aescbc:
       activeKey:
