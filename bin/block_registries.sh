@@ -2,7 +2,7 @@
 
 # Define the registries used by OpenShift
 REGISTRIES=("quay.io" "registry.redhat.io" "gcr.io" "registry.access.redhat.com" "docker.io")
-BRIDGE_INT="virbr0" # Change this if your KVM bridge has a different name
+BRIDGE_INT="ipv4" # Change this if your KVM bridge has a different name
 
 function block() {
     echo "Enabling DISCONNECTED mode..."
