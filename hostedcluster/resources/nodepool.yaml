@@ -1,7 +1,6 @@
 apiVersion: hypershift.openshift.io/v1beta1
 kind: NodePool
 metadata:
-  creationTimestamp: null
   name: hosted-ipv4
   namespace: clusters
 spec:
@@ -15,7 +14,7 @@ spec:
   platform:
     type: Agent
   release:
-    image: harbor.ocplocal.itix/openshift-release-dev/ocp-release:4.18.26-x86_64
+    image: harbor.ocplocal.itix/ocp-mirror-local/openshift/release-images:4.18.26-x86_64
   replicas: 0
 status:
   replicas: 0
