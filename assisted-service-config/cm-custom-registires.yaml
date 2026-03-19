@@ -41,3 +41,29 @@ data:
     S2PkxDJyOcOdCoRndx7ULsix1jd0ifd125s9Tv4zhASSTK3SRoVXcXMgULZj7V+C
     uSM33FKKiMc1Slu422WLrrST1Xfav1Jx9UoFeJo4UvfE0iQiHFzI
     -----END CERTIFICATE-----
+  registries.conf: |
+    unqualified-search-registries = ["registry.access.redhat.com", "docker.io"]
+
+    [[registry]]
+    prefix = ""
+    location = "registry.redhat.io/openshift4"
+    mirror-by-digest-only = true
+
+    [[registry.mirror]]
+      location = "harbor.ocplocal.itix/ocp-mirror-local/openshift4"
+    
+    [[registry]]
+    prefix = ""
+    location = "registry.redhat.io/rhacm2"
+    mirror-by-digest-only = true
+    
+    [[registry.mirror]]
+      location = "harbor.ocplocal.itix/ocp-mirror-local/rhacm2"
+
+    [[registry]]
+    prefix = ""
+    location = "registry.redhat.io/multicluster-engine"
+    mirror-by-digest-only = true
+    
+    [[registry.mirror]]
+      location = "harbor.ocplocal.itix/ocp-mirror-local/multicluster-engine"

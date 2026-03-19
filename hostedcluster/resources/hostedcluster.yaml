@@ -19,10 +19,10 @@ spec:
     - harbor.ocplocal.itix/ocp-mirror-local/openshift/release
   - source: registry.redhat.io/multicluster-engine
     mirrors:
-    - harbor.ocplocal.itix/ocp-catalog-mirror/multicluster-engine
+    - harbor.ocplocal.itix/ocp-mirror-local/multicluster-engine
   - source: registry.redhat.io/rhacm2
     mirrors:
-    - harbor.ocplocal.itix/ocp-catalog-mirror/rhacm2
+    - harbor.ocplocal.itix/ocp-mirror-local/rhacm2
   autoscaling: {}
   controllerAvailabilityPolicy: SingleReplica
   dns:
