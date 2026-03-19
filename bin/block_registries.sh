@@ -9,7 +9,8 @@ function block() {
     for reg in "${REGISTRIES[@]}"; do
         echo "Blocking $reg..."
         # We use -I to insert at the top of the chain to ensure it overrides ALLOW rules
-        sudo iptables -I FORWARD -d $reg -p tcp --dport 443 -j DROP
+        sudo iptables  -I FORWARD -d $reg -p tcp --dport 443 -j DROP
+        sudo ip6tables -I FORWARD -d $reg -p tcp --dport 443 -j DROP
     done
     echo "Traffic to registries is now blocked."
 }
@@ -19,7 +20,8 @@ function unblock() {
     for reg in "${REGISTRIES[@]}"; do
         echo "Allowing $reg..."
         # -D deletes the specific rule
-        sudo iptables -D FORWARD -d $reg -p tcp --dport 443 -j DROP 2>/dev/null
+        sudo iptables  -D FORWARD -d $reg -p tcp --dport 443 -j DROP 2>/dev/null
+        sudo ip6tables -D FORWARD -d $reg -p tcp --dport 443 -j DROP 2>/dev/null
     done
     echo "Access restored."
 }
@@ -32,7 +34,10 @@ case "$1" in
         unblock
         ;;
     status)
-        sudo iptables -L FORWARD -n -v | grep -E "DROP.*(443)"
+        echo "=== IPv4 ==="
+        sudo iptables  -L FORWARD -n -v | grep -E "DROP.*(443)"
+        echo "=== IPv6 ==="
+        sudo ip6tables -L FORWARD -n -v | grep -E "DROP.*(443)"
         ;;
     *)
         echo "Usage: $0 {enable|disable|status}"
