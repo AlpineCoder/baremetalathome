@@ -15,7 +15,7 @@ spec:
   platform:
     type: Agent
   release:
-    image: harbor.ocplocal.itix/ocp-mirror-local/openshift/release-images:4.18.30-x86_64
+    image: harbor.ocplocal.itix/ocp-mirror-local/openshift/release-images:4.18.28-x86_64
   replicas: 0
 status:
   replicas: 0
