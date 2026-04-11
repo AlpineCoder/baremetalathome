@@ -47,6 +47,18 @@ oc wait hostedcluster/hosted-ipv4 -n clusters \
 
 echo "=== [4/9] Creating worker VM on bastion ==="
 # shellcheck disable=SC2029
+ssh $SSH_OPTS "$BASTION" "
+    if kcli info vm hosted-ipv4-worker0 &>/dev/null; then
+        status=\$(kcli info vm hosted-ipv4-worker0 | grep -i '^status' | awk '{print \$2}')
+        if [[ \"\$status\" == 'down' ]]; then
+            echo 'Removing existing stopped VM hosted-ipv4-worker0...'
+            kcli delete vm -y hosted-ipv4-worker0
+        else
+            echo \"VM hosted-ipv4-worker0 already exists with status: \$status — not removing\"
+        fi
+    fi
+"
+# shellcheck disable=SC2029
 ssh $SSH_OPTS "$BASTION" \
     "kcli create vm \
         -P start=False \
